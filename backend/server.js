@@ -9,14 +9,16 @@ dotenv.config();
 
 const app = express();
 
-// Middlewares
+// Middlewares - ORDER MATTERS!
 app.use(cors({
   origin: 'https://empirefinal-osrw.vercel.app',
   credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(helmet())
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 
 // MongoDB connection
 const MONGODB_URI = process.env.MONGODBCONN;
